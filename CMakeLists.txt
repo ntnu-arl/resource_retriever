@@ -1,7 +1,12 @@
 cmake_minimum_required(VERSION 3.0.2)
 project(resource_retriever)
 
-set_directory_properties(PROPERTIES COMPILE_OPTIONS "-std=c++11")
+include(CheckCXXCompilerFlag)
+unset(COMPILER_SUPPORTS_CXX11 CACHE)
+check_cxx_compiler_flag(-std=c++14 COMPILER_SUPPORTS_CXX14)
+if(COMPILER_SUPPORTS_CXX11)
+  add_compile_options(-std=c++14)
+endif()
 
 find_package(catkin REQUIRED COMPONENTS rosconsole roslib)
 
